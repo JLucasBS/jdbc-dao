@@ -57,7 +57,7 @@ public class DB {
 			}
 		}
 	}
-	
+
 	public static void closeResultSet(ResultSet rs) {
 		if (rs != null) {
 			try {
@@ -67,5 +67,25 @@ public class DB {
 			}
 		}
 	}
+
+	public static void commit() {
+		try {
+			if (conn != null) {
+				conn.commit();
+			}
+		} catch (SQLException e) {
+			throw new DbException("Unexpected error on commit: " + e.getMessage());
+		}
+	}
 	
+	public static void rollback() {
+		try {
+			if (conn != null) {
+				conn.rollback();
+			}
+		} catch (SQLException e) {
+			throw new DbException("Unexpected error on rollback: " + e.getMessage());
+		}
+	}
+
 }
